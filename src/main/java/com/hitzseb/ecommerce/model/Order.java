@@ -17,7 +17,7 @@ public class Order {
     private LocalDateTime creationDate;
     private LocalDateTime receptionDate;
     @ManyToOne
-    private AppUser user;
+    private User user;
     @OneToMany(mappedBy = "order")
-    List<OrderDetail> details;
+    List<Detail> details;
 }

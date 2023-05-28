@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <th:replace th:fragment="common-css" th:replace="base :: common-css"></th:replace>
+    <title>Product List</title>
+</head>
+<body>
+
+<header th:replace="base :: admin-header"></header>
+
+<!-- Page Content -->
+<div class="container my-5 py-5">
+
+
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mb-3">
+        Spring eCommerce <small>Productos</small>
+    </h1>
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="@{/admin}">Home</a></li>
+        <li class="breadcrumb-item active">Ver Productos</li>
+    </ol>
+
+    <a class="btn btn-primary" th:href="@{/product/new}" > Crear Producto</a>
+    <h2>Productos</h2>
+    <table class="table text-center">
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Imagen</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product:${products}">
+            <td th:text="${product.name}"></td>
+            <td>
+                <img th:src="${product.image}" width="100">
+            </td>
+            <td th:text="${product.description}"></td>
+            <td th:text="${product.stock}"></td>
+            <td th:text="${product.price}"></td>
+            <td>
+                <a  class="mr-3" th:href="@{product/{id}/edit (id=${product.id}) }">Editar</a>
+                <a  class="text-danger" th:href="@{product/{id}/delete (id=${product.id}) }">Borrar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<!-- /.container -->
+
+<footer th:replace="base :: footer"></footer>
+
+<th:replace th:fragment="scripts" th:replace="base :: scripts"></th:replace>
+
+</body>
+</html>

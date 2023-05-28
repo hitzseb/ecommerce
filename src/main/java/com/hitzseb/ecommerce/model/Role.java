@@ -1,5 +1,5 @@
 package com.hitzseb.ecommerce.model;
 
-public enum UserRole {
+public enum Role {
     USER, ADMIN
 }

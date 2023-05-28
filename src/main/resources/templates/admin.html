@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <th:replace th:fragment="common-css" th:replace="base :: common-css"></th:replace>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+<header th:replace="base :: admin-header"></header>
+
+<div class="container my-5 py-5">
+    <h1>Admin Dashboard</h1>
+</div>
+
+<footer th:replace="base :: footer"></footer>
+
+<th:replace th:fragment="scripts" th:replace="base :: scripts"></th:replace>
+
+</body>
+</html>
