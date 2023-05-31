@@ -12,6 +12,9 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RequiredArgsConstructor
 @SpringBootApplication
 public class EcommerceApplication implements ApplicationRunner {
@@ -34,15 +37,22 @@ public class EcommerceApplication implements ApplicationRunner {
 		user.setEnabled(true);
 		userRepo.save(user);
 
-		Product product = new Product();
-		product.setId(1L);
-		product.setName("Producto de prueba");
-		product.setDescription("Este es un producto para probar las funcionalidades de update y delete");
-		product.setImage("https://img.freepik.com/foto-gratis/mostrando-carro-carro-compras-linea-signo-grafico_53876-133967.jpg");
-		product.setStock(4);
-		product.setPrice(250);
-		product.setUser(user);
-		productRepo.save(product);
-	}
+		List<Product> products = new ArrayList<>();
 
+		for (int i = 1; i <= 10; i++) {
+			Product product = new Product();
+			double price = Math.random() * 1000;
+			double roundedPrice = Math.round(price * 100.0) / 100.0;
+			product.setId((long)i);
+			product.setName("Producto de prueba " + i);
+			product.setDescription("Este es un producto para ver como se ve la lista de productos y probar las funcionalidades update y delete.");
+			product.setImage("/images/default.jpg");
+			product.setStock((int) (Math.random() * 100) + 1);
+			product.setPrice(roundedPrice);
+			product.setUser(user);
+			products.add(product);
+		}
+
+		productRepo.saveAll(products);
+	}
 }

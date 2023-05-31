@@ -2,12 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <th:replace th:fragment="common-css" th:replace="base :: common-css"></th:replace>
+    <div th:replace="base :: css"></div>
     <title>Product New</title>
 </head>
 <body>
 
-<header th:replace="base :: admin-header"></header>
+<header th:replace="base :: header"></header>
 
 <!-- Page Content -->
 <div class="container my-5 py-5">
@@ -19,7 +19,7 @@
     </h1>
 
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
         <li class="breadcrumb-item active">Crear Productos</li>
     </ol>
 
@@ -81,7 +81,7 @@
 
 <footer th:replace="base :: footer"></footer>
 
-<th:replace th:fragment="scripts" th:replace="base :: scripts"></th:replace>
+<div th:replace="base :: scripts"></div>
 
 </body>
 </html>
