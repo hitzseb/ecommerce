@@ -1,12 +1,12 @@
 package com.hitzseb.ecommerce;
 
+import com.github.javafaker.Faker;
 import com.hitzseb.ecommerce.model.Product;
 import com.hitzseb.ecommerce.model.Role;
 import com.hitzseb.ecommerce.model.User;
 import com.hitzseb.ecommerce.repo.ProductRepo;
 import com.hitzseb.ecommerce.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -27,7 +27,7 @@ public class EcommerceApplication implements ApplicationRunner {
 	}
 
 	@Override
-	public void run(ApplicationArguments args) throws Exception {
+	public void run(ApplicationArguments args) {
 		User user = new User();
 		user.setId(1L);
 		user.setUsername("admin");
@@ -38,14 +38,17 @@ public class EcommerceApplication implements ApplicationRunner {
 		userRepo.save(user);
 
 		List<Product> products = new ArrayList<>();
+		Faker faker = new Faker();
 
-		for (int i = 1; i <= 10; i++) {
+		for (int i = 1; i <= 20; i++) {
 			Product product = new Product();
 			double price = Math.random() * 1000;
 			double roundedPrice = Math.round(price * 100.0) / 100.0;
+			String name = faker.commerce().productName();
+			String description = faker.lorem().sentence(10);
 			product.setId((long)i);
-			product.setName("Producto de prueba " + i);
-			product.setDescription("Este es un producto para ver como se ve la lista de productos y probar las funcionalidades update y delete.");
+			product.setName(name);
+			product.setDescription(description);
 			product.setImage("/images/default.jpg");
 			product.setStock((int) (Math.random() * 100) + 1);
 			product.setPrice(roundedPrice);
