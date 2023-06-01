@@ -17,5 +17,7 @@ public class Detail {
     @ManyToOne
     private Order order;
     @ManyToOne
+    private Cart cart;
+    @ManyToOne
     private Product product;
 }

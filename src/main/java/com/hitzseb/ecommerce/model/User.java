@@ -16,4 +16,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
     private boolean isEnabled = false;
+    @OneToOne
+    private Cart cart;
 }
