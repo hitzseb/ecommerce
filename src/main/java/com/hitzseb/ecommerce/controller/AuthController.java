@@ -2,7 +2,10 @@ package com.hitzseb.ecommerce.controller;
 
 import com.hitzseb.ecommerce.model.User;
 import com.hitzseb.ecommerce.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -56,6 +59,13 @@ public class AuthController {
         User user = new User();
         model.addAttribute("user", user);
         return "login";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        SecurityContextHolder.clearContext();
+        session.invalidate();
+        return "redirect:";
     }
 
 }
