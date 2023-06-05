@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <div th:replace="base :: css"></div>
+  <title>Greeting</title>
+</head>
+<body>
+
+<header th:replace="base :: header"></header>
+
+<div class="container my-5 py-5">
+  <div class="jumbotron">
+    <h1 class="display-4">Spring eCommerce</h1>
+    <p class="lead fw-bold" th:text="${message}"></p>
+    <hr class="my-4">
+    <a class="btn btn-primary btn-lg" href="/" role="button">Inicio</a>
+  </div>
+</div>
+
+<footer th:replace="base :: footer"></footer>
+
+<div th:replace="base :: scripts"></div>
+
+</body>
+</html>

@@ -16,6 +16,5 @@ public class Product {
     private double price;
     private int stock;
     private boolean isAvailable = true;
-    @ManyToOne
-    private User user;
+    private boolean isFeatured = false;
 }

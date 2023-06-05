@@ -9,7 +9,7 @@ import lombok.Data;
 public class Detail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
     private int quantity;
     private double price;
