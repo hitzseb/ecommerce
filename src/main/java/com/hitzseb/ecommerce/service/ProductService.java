@@ -4,6 +4,9 @@ import com.hitzseb.ecommerce.model.Product;
 import com.hitzseb.ecommerce.repo.ProductRepo;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +18,15 @@ public class ProductService {
 
     public List<Product> findAllProducts() {
         return repo.findAll();
+    }
+
+    public Page<Product> findPaginatedProducts(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return repo.findAll(pageable);
+    }
+
+    public List<Product> findFeaturedProducts() {
+        return repo.findByIsFeaturedTrue();
     }
 
     public Product findProductById(Long id) throws EntityNotFoundException {

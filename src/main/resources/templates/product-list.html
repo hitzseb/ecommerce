@@ -12,49 +12,56 @@
 <!-- Page Content -->
 <div class="container my-5 py-5">
 
+    <!-- Page Features -->
+    <div class="row text-center my-5">
 
-    <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mb-3">
-        Spring eCommerce <small>Productos</small>
-    </h1>
+        <div class="col-lg-3 col-md-6 mb-4" th:each="product: ${products}">
+            <div class="card h-100">
 
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active">Ver Productos</li>
-    </ol>
+                <img class="card-img-top"
+                     th:src="@{${product.image}}" alt="">
 
-    <a class="btn btn-primary" th:href="@{/product/new}" > Crear Producto</a>
-    <h2>Productos</h2>
-    <table class="table table-borderless table-hover text-center">
-        <thead>
-        <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Imagen</th>
-            <th scope="col">Descripción</th>
-            <th scope="col">Stock</th>
-            <th scope="col">Precio</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="product:${products}">
-            <td class="align-middle" th:text="${product.name}"></td>
-            <td class="align-middle">
-                <img th:src="${product.image}" width="100">
-            </td>
-            <td class="align-middle" th:text="${product.description}"></td>
-            <td class="align-middle" th:text="${product.stock}"></td>
-            <td class="align-middle">$<span th:text="${product.price}"></span></td>
-            <td class="align-middle">
-                <a th:href="@{product/{id}/edit (id=${product.id}) }">Editar</a>
-            </td>
-            <td class="align-middle">
-                <a class="text-danger" th:href="@{product/{id}/delete (id=${product.id}) }">Borrar</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+
+                <div class="card-body">
+                    <p class="card-text" th:text="${product.name}"></p>
+                </div>
+                <div class="card-footer">
+                    <a th:href="@{/product/{id}  (id=${product.id})  }" class="btn btn-success">Ver
+                        producto</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <div class="row justify-content-center">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+
+                    <!-- Página anterior -->
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{/product(page=${currentPage - 1})}" th:if="${currentPage > 0}">&laquo;</a>
+                    </li>
+
+                    <!-- Páginas disponibles -->
+                    <div th:each="i: ${#numbers.sequence(0,totalPages-1)}">
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{/product(page=${i})}" th:text="${i+1}"></a>
+                        </li>
+                    </div>
+
+
+                    <!-- Página siguiente -->
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{/product(page=${currentPage + 1})}" th:if="${currentPage < totalPages - 1}">&raquo;</a>
+                    </li>
+
+                </ul>
+            </nav>
+
+    </div>
+
+
 
 </div>
 <!-- /.container -->

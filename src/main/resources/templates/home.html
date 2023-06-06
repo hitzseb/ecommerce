@@ -14,9 +14,10 @@
 
     <!-- Jumbotron Header -->
     <header class="jumbotron">
-        <p class="lead" th:if="${name}" th:text="'Hola, ' + ${name}"></p>
-        <h1 class="display-3">Bienvenido a Spring Ecommerce</h1>
-        <p class="lead">Tu tienda de productos en Línea</p>
+        <h1 class="display-4">Bienvenido a Spring Ecommerce</h1>
+        <hr class="my-4">
+        <p th:if="${role == null}" class="lead">Tu tienda de productos en Línea</p>
+        <p th:if="${role != null}" class="lead" th:text="'Hola, ' + ${name}"></p>
     </header>
 
     <!-- Page Features -->
@@ -41,6 +42,10 @@
 
     </div>
     <!-- /.row -->
+
+    <div class="row justify-content-center">
+        <a href="/product">Ver todos los productos</a>
+    </div>
 
 </div>
 <!-- /.container -->

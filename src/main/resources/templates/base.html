@@ -39,10 +39,9 @@
 
                         <div class="dropdown-menu"
                              aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" th:href="@{/product}">Productos</a>
-                            <a class="dropdown-item" th:href="@{/administrador/usuarios}">Usuarios</a>
-                            <a class="dropdown-item" th:href="@{/administrador/ordenes}">Ordenes</a>
-                            <a class="dropdown-item" th:href="@{/usuario/cerrar}">Salir</a>
+                            <a class="dropdown-item" th:href="@{/admin/product}">Productos</a>
+                            <a class="dropdown-item" th:href="@{/admin/user}">Usuarios</a>
+                            <a class="dropdown-item" th:href="@{/admin/order}">Ordenes</a>
                         </div>
                     </li>
                     <li th:if="${role == null}" class="nav-item"><a class="nav-link" th:href="@{/login}">Login</a></li>

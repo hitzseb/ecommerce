@@ -18,10 +18,10 @@ public class HomeController {
 
     @GetMapping("/")
     public String showHome(Model model, Authentication authentication, HttpSession session) {
-        List<Product> products = productService.findAllProducts();
+        List<Product> featuredProducts = productService.findFeaturedProducts();
         model.addAttribute("role", session.getAttribute("userRole"));
         model.addAttribute("name", session.getAttribute("userName"));
-        model.addAttribute("products", products);
+        model.addAttribute("products", featuredProducts);
         return "home";
     }
 
