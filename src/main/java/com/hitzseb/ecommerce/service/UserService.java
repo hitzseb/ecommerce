@@ -23,6 +23,10 @@ public class UserService implements UserDetailsService {
     private final String USER_NOT_FOUND_MSG = "user with email %s not found";
     private final EmailService emailService;
 
+    public Optional<User> findUserById(Long id) {
+        return repo.findById(id);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = repo.findByUsername(username)
@@ -31,7 +35,8 @@ public class UserService implements UserDetailsService {
 
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session = attr.getRequest().getSession(true);
-
+        session.setAttribute("userId", user.getId());
+        session.setAttribute("userCart", user.getCart());
         session.setAttribute("userName", user.getFirstName());
         session.setAttribute("userRole", user.getRole().name());
 

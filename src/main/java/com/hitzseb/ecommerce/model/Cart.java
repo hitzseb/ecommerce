@@ -14,6 +14,6 @@ public class Cart {
     private Long id;
     @OneToOne
     private User user;
-    @OneToMany(mappedBy = "cart")
-    List<Detail> details;
+    @OneToMany
+    List<Product> products;
 }

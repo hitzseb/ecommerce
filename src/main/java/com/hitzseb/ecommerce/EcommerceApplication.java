@@ -49,7 +49,7 @@ public class EcommerceApplication implements ApplicationRunner {
 		List<Product> products = new ArrayList<>();
 		Faker faker = new Faker();
 
-		for (int i = 0; i < 16; i++) {
+		for (int i = 0; i < 8; i++) {
 			Product product = new Product();
 			double price = Math.random() * 1000;
 			double roundedPrice = Math.round(price * 100.0) / 100.0;
@@ -64,7 +64,7 @@ public class EcommerceApplication implements ApplicationRunner {
 			products.add(product);
 		}
 
-		for (int i = 0; i < 32; i++) {
+		for (int i = 0; i < 16; i++) {
 			Product product = new Product();
 			double price = Math.random() * 1000;
 			double roundedPrice = Math.round(price * 100.0) / 100.0;

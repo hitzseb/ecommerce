@@ -2,6 +2,7 @@ package com.hitzseb.ecommerce.controller;
 
 import com.hitzseb.ecommerce.model.Product;
 import com.hitzseb.ecommerce.service.ProductService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,15 +17,17 @@ public class AdminProductController {
     private final ProductService service;
 
     @GetMapping
-    public String showProductList(Model model) {
+    public String showProductList(Model model, HttpSession session) {
         List<Product> products = service.findAllProducts();
+        model.addAttribute("role", session.getAttribute("userRole"));
         model.addAttribute("products", products);
         return "adm-product-list";
     }
 
     @GetMapping("/new")
-    public String showProductNew(Model model) {
+    public String showProductNew(Model model, HttpSession session) {
         Product product = new Product();
+        model.addAttribute("role", session.getAttribute("userRole"));
         model.addAttribute("product", product);
         return "adm-product-new";
     }
@@ -36,8 +39,9 @@ public class AdminProductController {
     }
 
     @GetMapping("/{id}/edit")
-    public String showProductUpdate(@PathVariable Long id, Model model) {
+    public String showProductUpdate(@PathVariable Long id, Model model, HttpSession session) {
         Product product = service.findProductById(id);
+        model.addAttribute("role", session.getAttribute("userRole"));
         model.addAttribute("product", product);
         return "adm-product-edit";
     }

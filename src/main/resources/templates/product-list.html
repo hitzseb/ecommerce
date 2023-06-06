@@ -12,6 +12,11 @@
 <!-- Page Content -->
 <div class="container my-5 py-5">
 
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active">Ver Productos</li>
+    </ol>
+
     <!-- Page Features -->
     <div class="row text-center my-5">
 
@@ -35,32 +40,32 @@
     <!-- /.row -->
 
     <div class="row justify-content-center">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
 
-                    <!-- Página anterior -->
+                <!-- Página anterior -->
+                <li class="page-item">
+                    <a class="page-link" th:href="@{/product(page=${currentPage - 1})}" th:if="${currentPage > 0}">&laquo;</a>
+                </li>
+
+                <!-- Páginas disponibles -->
+                <div th:each="i: ${#numbers.sequence(0,totalPages-1)}">
                     <li class="page-item">
-                        <a class="page-link" th:href="@{/product(page=${currentPage - 1})}" th:if="${currentPage > 0}">&laquo;</a>
+                        <a class="page-link" th:href="@{/product(page=${i})}" th:text="${i+1}"></a>
                     </li>
-
-                    <!-- Páginas disponibles -->
-                    <div th:each="i: ${#numbers.sequence(0,totalPages-1)}">
-                        <li class="page-item">
-                            <a class="page-link" th:href="@{/product(page=${i})}" th:text="${i+1}"></a>
-                        </li>
-                    </div>
+                </div>
 
 
-                    <!-- Página siguiente -->
-                    <li class="page-item">
-                        <a class="page-link" th:href="@{/product(page=${currentPage + 1})}" th:if="${currentPage < totalPages - 1}">&raquo;</a>
-                    </li>
+                <!-- Página siguiente -->
+                <li class="page-item">
+                    <a class="page-link" th:href="@{/product(page=${currentPage + 1})}"
+                       th:if="${currentPage < totalPages - 1}">&raquo;</a>
+                </li>
 
-                </ul>
-            </nav>
+            </ul>
+        </nav>
 
     </div>
-
 
 
 </div>

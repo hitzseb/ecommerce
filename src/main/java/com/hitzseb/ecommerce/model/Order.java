@@ -14,10 +14,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String orderNumber;
-    private LocalDateTime creationDate;
-    private LocalDateTime receptionDate;
+    private LocalDateTime date;
+    private double total;
     @ManyToOne
     private User user;
-    @OneToMany(mappedBy = "order")
-    List<Detail> details;
+    @OneToMany
+    List<Product> products;
 }

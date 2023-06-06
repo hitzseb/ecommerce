@@ -17,7 +17,7 @@ public class HomeController {
     private final ProductService productService;
 
     @GetMapping("/")
-    public String showHome(Model model, Authentication authentication, HttpSession session) {
+    public String showHome(Model model, HttpSession session) {
         List<Product> featuredProducts = productService.findFeaturedProducts();
         model.addAttribute("role", session.getAttribute("userRole"));
         model.addAttribute("name", session.getAttribute("userName"));
