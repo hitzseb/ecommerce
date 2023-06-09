@@ -20,16 +20,6 @@
     </ol>
 
     <table class="table table-borderless table-hover text-center">
-        <thead>
-        <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Imagen</th>
-            <th scope="col">Descripción</th>
-            <th scope="col">Stock</th>
-            <th scope="col">Precio</th>
-            <th></th>
-        </tr>
-        </thead>
         <tbody>
         <tr th:each="product:${cart}">
             <td class="align-middle" th:text="${product.name}"></td>
@@ -37,7 +27,6 @@
                 <img th:src="${product.image}" width="100">
             </td>
             <td class="align-middle" th:text="${product.description}"></td>
-            <td class="align-middle" th:text="${product.stock}"></td>
             <td class="align-middle">$<span th:text="${product.price}"></span></td>
             <td class="align-middle">
                 <a th:href="@{/cart/remove(productId=${product.id})}">Eliminar</a>
@@ -46,7 +35,7 @@
         </tbody>
     </table>
 
-    <p class="lead">Total: <span class="font-weight-bold" th:text="${total}"></span></p>
+    <p th:if="${isNotEmpty}" class="lead">Total: <span class="font-weight-bold" th:text="${total}"></span></p>
 
     <a th:if="${isNotEmpty}" class="btn btn-success" href="/payment">Comprar</a>
 

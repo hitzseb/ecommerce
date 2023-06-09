@@ -50,7 +50,7 @@
 
                 <!-- Páginas disponibles -->
                 <div th:each="i: ${#numbers.sequence(0,totalPages-1)}">
-                    <li class="page-item">
+                    <li class="page-item" th:if="${totalPages > 0}">
                         <a class="page-link" th:href="@{/product(page=${i})}" th:text="${i+1}"></a>
                     </li>
                 </div>

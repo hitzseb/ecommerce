@@ -16,11 +16,9 @@
     <!-- Page Heading/Breadcrumbs -->
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active">Ver Productos</li>
+        <li class="breadcrumb-item active">Administrar Productos</li>
     </ol>
 
-    <a class="btn btn-primary" th:href="@{/admin/product/new}" > Crear Producto</a>
-    <h2>Productos</h2>
     <table class="table table-borderless table-hover text-center">
         <thead>
         <tr>
@@ -51,6 +49,8 @@
         </tr>
         </tbody>
     </table>
+
+    <a class="btn btn-primary" th:href="@{/admin/product/new}" >Agregar Producto</a>
 
 </div>
 <!-- /.container -->

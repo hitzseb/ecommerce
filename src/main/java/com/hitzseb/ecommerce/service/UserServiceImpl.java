@@ -1,5 +1,6 @@
 package com.hitzseb.ecommerce.service;
 
+import com.hitzseb.ecommerce.model.Role;
 import com.hitzseb.ecommerce.model.User;
 import com.hitzseb.ecommerce.repo.UserRepo;
 import jakarta.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -73,5 +75,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(User user) {
         repo.save(user);
+    }
+
+    @Override
+    public List<User> findAllUsers(HttpSession session) {
+        return repo.findByRoleOrderByName(Role.USER);
     }
 }

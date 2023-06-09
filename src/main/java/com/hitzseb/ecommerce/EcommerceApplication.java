@@ -46,6 +46,17 @@ public class EcommerceApplication implements ApplicationRunner {
 		admin.setEnabled(true);
 		userRepo.save(admin);
 
+		List<User> userList = new ArrayList<>();
+		for (int i = 0; i < 20; i++) {
+			User randomUser = new User();
+			randomUser.setName(faker.funnyName().name());
+			randomUser.setUsername(faker.internet().emailAddress());
+			randomUser.setAddress(faker.address().fullAddress());
+			randomUser.setEnabled(true);
+			userList.add(randomUser);
+		}
+		userRepo.saveAll(userList);
+
 		List<Product> products = new ArrayList<>();
 
 		for (int i = 0; i < 8; i++) {

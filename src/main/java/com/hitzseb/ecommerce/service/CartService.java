@@ -10,4 +10,5 @@ public interface CartService {
     void removeProductById(Long id, HttpSession session);
     List<Product> getCartProducts(HttpSession session);
     double getTotalPrice(List<Product> products);
+    void clearCart(HttpSession session);
 }

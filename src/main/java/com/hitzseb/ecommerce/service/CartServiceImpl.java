@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -50,6 +51,14 @@ public class CartServiceImpl implements CartService {
             total += product.getPrice();
         }
         return total;
+    }
+
+    @Override
+    public void clearCart(HttpSession session) {
+        Long userId = (Long) session.getAttribute("id");
+        User user = userService.findUserById(userId).get();
+        user.setCart(new ArrayList<>());
+        userService.updateUser(user);
     }
 
 }

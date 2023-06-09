@@ -1,9 +1,11 @@
 package com.hitzseb.ecommerce.service;
 
 import com.hitzseb.ecommerce.model.User;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService extends UserDetailsService {
@@ -13,4 +15,6 @@ public interface UserService extends UserDetailsService {
     void enableUser(User user);
     Optional<User> findUserById(Long id);
     void updateUser(User user);
+
+    List<User> findAllUsers(HttpSession session);
 }
