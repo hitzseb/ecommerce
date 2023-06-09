@@ -27,7 +27,7 @@
             <p th:text="${product.description}"></p>
             <p class="lead" th:text="${product.stock} + ' en stock'"></p>
             <p class="h3" th:text="'$' + ${product.price}"></p>
-            <a class="btn btn-success" href="#">Agregar al carrito</a>
+            <a th:if="${role == 'USER'}" class="btn btn-success" th:href="@{/cart/add(productId=${product.id})}">Agregar al carrito</a>
         </div>
     </div>
 

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <div th:replace="base :: css"></div>
+    <title>Cart</title>
+</head>
+<body>
+
+<header th:replace="base :: header"></header>
+
+<!-- Page Content -->
+<div class="container my-5 py-5">
+
+
+    <!-- Page Heading/Breadcrumbs -->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/">Mis órdenes</a></li>
+        <li class="breadcrumb-item active">Orden</li>
+    </ol>
+
+    <p class="h5">Order number <span th:text="${order.orderNumber}"></span></p>
+    <p>Buyer:
+        <span th:text="${order.buyer}"></span>
+    </p>
+    <p>Address:
+        <span th:text="${order.address}"></span>
+    </p>
+    <p>Date: <span th:text="${order.date}"></span></p>
+    <p class="font-weight-bold">Details:</p>
+    <div th:each="detail:${order.details}">
+        <span th:text="${detail.name}"></span>&nbsp;
+        $<span th:text="${detail.price}"></span>
+    </div>
+    <p class="font-weight-bold">
+        $<span th:text="${order.total}"></span>
+    </p>
+
+
+</div>
+<!-- /.container -->
+
+<footer th:replace="base :: footer"></footer>
+
+<div th:replace="base :: scripts"></div>
+
+</body>
+</html>

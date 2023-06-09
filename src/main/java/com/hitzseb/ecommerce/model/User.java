@@ -17,21 +17,23 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstName;
-    private String lastName;
-    private String username;
-    private String country;
-    private String city;
+    private String name;
     private String address;
+    private String username;
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role = Role.USER;
     private String verificationToken;
     private boolean isEnabled = false;
-    @OneToOne
-    private Cart cart;
+    @ManyToMany(cascade = CascadeType.REMOVE)
+    @JoinTable(
+            name = "cart_products",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Product> cart;
     @OneToMany
-    private List<Product> favorites;
+    List<Order> orders;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

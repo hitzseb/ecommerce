@@ -19,7 +19,7 @@ public class AdminProductController {
     @GetMapping
     public String showProductList(Model model, HttpSession session) {
         List<Product> products = service.findAllProducts();
-        model.addAttribute("role", session.getAttribute("userRole"));
+        model.addAttribute("role", session.getAttribute("role"));
         model.addAttribute("products", products);
         return "adm-product-list";
     }
@@ -27,7 +27,7 @@ public class AdminProductController {
     @GetMapping("/new")
     public String showProductNew(Model model, HttpSession session) {
         Product product = new Product();
-        model.addAttribute("role", session.getAttribute("userRole"));
+        model.addAttribute("role", session.getAttribute("role"));
         model.addAttribute("product", product);
         return "adm-product-new";
     }
@@ -41,7 +41,7 @@ public class AdminProductController {
     @GetMapping("/{id}/edit")
     public String showProductUpdate(@PathVariable Long id, Model model, HttpSession session) {
         Product product = service.findProductById(id);
-        model.addAttribute("role", session.getAttribute("userRole"));
+        model.addAttribute("role", session.getAttribute("role"));
         model.addAttribute("product", product);
         return "adm-product-edit";
     }
@@ -57,4 +57,5 @@ public class AdminProductController {
         service.deleteProduct(id);
         return "redirect:/admin/product";
     }
+
 }

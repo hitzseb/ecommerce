@@ -15,6 +15,5 @@ public class Product {
     private String image;
     private double price;
     private int stock;
-    private boolean isAvailable = true;
     private boolean isFeatured = false;
 }

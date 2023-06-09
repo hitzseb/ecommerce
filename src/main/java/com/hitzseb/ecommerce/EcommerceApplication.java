@@ -1,9 +1,7 @@
 package com.hitzseb.ecommerce;
 
 import com.github.javafaker.Faker;
-import com.hitzseb.ecommerce.model.Product;
-import com.hitzseb.ecommerce.model.Role;
-import com.hitzseb.ecommerce.model.User;
+import com.hitzseb.ecommerce.model.*;
 import com.hitzseb.ecommerce.repo.ProductRepo;
 import com.hitzseb.ecommerce.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @SpringBootApplication
 public class EcommerceApplication implements ApplicationRunner {
-
 	private final ProductRepo productRepo;
 	private final UserRepo userRepo;
 	private final BCryptPasswordEncoder passwordEncoder;
@@ -30,11 +27,14 @@ public class EcommerceApplication implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) {
+		Faker faker = new Faker();
+
 		User user = new User();
 		user.setPassword(passwordEncoder.encode("user"));
 		user.setUsername("user@ecommerce.com");
 		user.setRole(Role.USER);
-		user.setFirstName("Test User");
+		user.setName(faker.funnyName().name());
+		user.setAddress(faker.address().fullAddress());
 		user.setEnabled(true);
 		userRepo.save(user);
 
@@ -42,12 +42,11 @@ public class EcommerceApplication implements ApplicationRunner {
 		admin.setPassword(passwordEncoder.encode("admin"));
 		admin.setUsername("admin@ecommerce.com");
 		admin.setRole(Role.ADMIN);
-		admin.setFirstName("Test Admin");
+		admin.setName(faker.funnyName().name());
 		admin.setEnabled(true);
 		userRepo.save(admin);
 
 		List<Product> products = new ArrayList<>();
-		Faker faker = new Faker();
 
 		for (int i = 0; i < 8; i++) {
 			Product product = new Product();
@@ -64,7 +63,7 @@ public class EcommerceApplication implements ApplicationRunner {
 			products.add(product);
 		}
 
-		for (int i = 0; i < 16; i++) {
+		for (int i = 0; i < 24; i++) {
 			Product product = new Product();
 			double price = Math.random() * 1000;
 			double roundedPrice = Math.round(price * 100.0) / 100.0;
@@ -79,6 +78,5 @@ public class EcommerceApplication implements ApplicationRunner {
 		}
 
 		productRepo.saveAll(products);
-
 	}
 }

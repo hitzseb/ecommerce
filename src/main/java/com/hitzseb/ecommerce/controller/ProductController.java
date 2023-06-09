@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,7 +24,7 @@ public class ProductController {
         Page<Product> productsPage = productService.findPaginatedProducts(page, size);
         List<Product> products = productsPage.getContent();
         int totalPages = productsPage.getTotalPages();
-        model.addAttribute("role", session.getAttribute("userRole"));
+        model.addAttribute("role", session.getAttribute("role"));
         model.addAttribute("products", products);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("currentPage", page);
@@ -37,7 +34,7 @@ public class ProductController {
     @GetMapping("/{id}")
     public String showProduct(@PathVariable Long id, Model model, HttpSession session) {
         Product product = productService.findProductById(id);
-        model.addAttribute("role", session.getAttribute("userRole"));
+        model.addAttribute("role", session.getAttribute("role"));
         model.addAttribute("product", product);
         return "product";
     }
