@@ -28,6 +28,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> searchProducts(String name) {
+        return repo.findByNameContainingIgnoreCase(name);
+    }
+
+    @Override
     public List<Product> findFeaturedProducts() {
         return repo.findByIsFeaturedTrue();
     }

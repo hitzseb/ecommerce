@@ -9,6 +9,7 @@ import java.util.List;
 public interface ProductService {
     public List<Product> findAllProducts();
     public Page<Product> findPaginatedProducts(int page, int size);
+    public List<Product> searchProducts(String name);
     public List<Product> findFeaturedProducts();
     public Product findProductById(Long id) throws EntityNotFoundException;
     public void saveProduct(Product product);

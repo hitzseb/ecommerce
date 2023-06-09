@@ -31,6 +31,14 @@ public class ProductController {
         return "product-list";
     }
 
+    @GetMapping("/search")
+    public String searchProducts(@RequestParam("name") String name, Model model, HttpSession session) {
+        List<Product> products = productService.searchProducts(name);
+        model.addAttribute("role", session.getAttribute("role"));
+        model.addAttribute("products", products);
+        return "product-list";
+    }
+
     @GetMapping("/{id}")
     public String showProduct(@PathVariable Long id, Model model, HttpSession session) {
         Product product = productService.findProductById(id);

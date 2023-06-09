@@ -32,7 +32,7 @@
     </tbody>
   </table>
 
-  <div class="justify-content-center">
+  <div class="justify-content-center" th:if="${totalPages > 1}">
     <nav aria-label="Page navigation example">
       <ul class="pagination">
 
@@ -43,7 +43,7 @@
 
         <!-- Páginas disponibles -->
         <div th:each="i: ${#numbers.sequence(0,totalPages-1)}">
-          <li class="page-item" th:if="${totalPages > 0}">
+          <li class="page-item">
             <a class="page-link" th:href="@{/admin/order(page=${i})}" th:text="${i+1}"></a>
           </li>
         </div>

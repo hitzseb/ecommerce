@@ -5,6 +5,7 @@ import com.hitzseb.ecommerce.model.*;
 import com.hitzseb.ecommerce.repo.ProductRepo;
 import com.hitzseb.ecommerce.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,6 +22,15 @@ public class EcommerceApplication implements ApplicationRunner {
 	private final UserRepo userRepo;
 	private final BCryptPasswordEncoder passwordEncoder;
 
+	@Value("${user.test.username}")
+	private String userUsername;
+	@Value("${user.test.password}")
+	private String userPassword;
+	@Value("${admin.test.username}")
+	private String adminUsername;
+	@Value("${admin.test.password}")
+	private String adminPassword;
+
 	public static void main(String[] args) {
 		SpringApplication.run(EcommerceApplication.class, args);
 	}
@@ -30,8 +40,8 @@ public class EcommerceApplication implements ApplicationRunner {
 		Faker faker = new Faker();
 
 		User user = new User();
-		user.setPassword(passwordEncoder.encode("user"));
-		user.setUsername("user@ecommerce.com");
+		user.setUsername(userUsername);
+		user.setPassword(passwordEncoder.encode(userPassword));
 		user.setRole(Role.USER);
 		user.setName(faker.funnyName().name());
 		user.setAddress(faker.address().fullAddress());
@@ -39,8 +49,8 @@ public class EcommerceApplication implements ApplicationRunner {
 		userRepo.save(user);
 
 		User admin = new User();
-		admin.setPassword(passwordEncoder.encode("admin"));
-		admin.setUsername("admin@ecommerce.com");
+		admin.setUsername(adminUsername);
+		admin.setPassword(passwordEncoder.encode(adminPassword));
 		admin.setRole(Role.ADMIN);
 		admin.setName(faker.funnyName().name());
 		admin.setEnabled(true);

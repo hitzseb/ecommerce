@@ -10,4 +10,5 @@ import java.util.List;
 public interface ProductRepo extends JpaRepository<Product, Long> {
     List<Product> findByIsFeaturedTrue();
     Page<Product> findAll(Pageable pageable);
+    List<Product> findByNameContainingIgnoreCase(String name);
 }
