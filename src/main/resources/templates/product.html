@@ -20,12 +20,12 @@
 
     <div class="row">
         <div class="col-lg-6 col-md-6 my-5">
-            <img class="img-fluid" th:src="@{${product.image}}" alt="">
+            <img class="img-fluid" th:src="${product.image}" alt="">
         </div>
         <div class="col-lg-6 col-md-6 my-5">
             <p class="h2" th:text="${product.name}"></p>
             <p th:text="${product.description}"></p>
-            <p class="lead" th:text="${product.stock} + ' en stock'"></p>
+            <p class="lead" th:src="${product.image}"></p>
             <p class="h3" th:text="'$' + ${product.price}"></p>
             <a th:if="${role == 'USER'}" class="btn btn-success" th:href="@{/cart/add(productId=${product.id})}">Agregar al carrito</a>
         </div>
