@@ -22,10 +22,6 @@ public class EcommerceApplication implements ApplicationRunner {
 	private final UserRepo userRepo;
 	private final BCryptPasswordEncoder passwordEncoder;
 
-	@Value("${user.test.username}")
-	private String userUsername;
-	@Value("${user.test.password}")
-	private String userPassword;
 	@Value("${admin.test.username}")
 	private String adminUsername;
 	@Value("${admin.test.password}")
@@ -39,20 +35,11 @@ public class EcommerceApplication implements ApplicationRunner {
 	public void run(ApplicationArguments args) {
 		Faker faker = new Faker();
 
-		User user = new User();
-		user.setUsername(userUsername);
-		user.setPassword(passwordEncoder.encode(userPassword));
-		user.setRole(Role.USER);
-		user.setName(faker.funnyName().name());
-		user.setAddress(faker.address().fullAddress());
-		user.setEnabled(true);
-		userRepo.save(user);
-
 		User admin = new User();
 		admin.setUsername(adminUsername);
 		admin.setPassword(passwordEncoder.encode(adminPassword));
 		admin.setRole(Role.ADMIN);
-		admin.setName(faker.funnyName().name());
+		admin.setName("Admin");
 		admin.setEnabled(true);
 		userRepo.save(admin);
 
