@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <div th:replace="base :: css"></div>
+    <title>eCommerce</title>
+</head>
+<body>
+
+<header th:replace="base :: header"></header>
+
+<!-- Page Content -->
+<div class="container my-5 py-5">
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active">Ver Productos</li>
+    </ol>
+
+    <!-- Page Features -->
+    <div class="row text-center my-5">
+
+        <div class="col-lg-3 col-md-6 mb-4" th:each="product: ${products}">
+            <div class="card h-100">
+
+                <img class="card-img-top img-fluid" th:src="${product.image}" alt="">
+
+                <div class="card-body">
+                    <p class="card-text" th:text="${product.name}"></p>
+                </div>
+                <div class="card-footer">
+                    <a th:href="@{/product/{id}  (id=${product.id})  }" class="btn btn-success">Ver
+                        producto</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <div class="row justify-content-center" th:if="${totalPages > 1}">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+
+                <!-- Página anterior -->
+                <li class="page-item">
+                    <a class="page-link" th:href="@{/product(page=${currentPage - 1})}" th:if="${currentPage > 0}">&laquo;</a>
+                </li>
+
+                <!-- Páginas disponibles -->
+                <div th:each="i: ${#numbers.sequence(0,totalPages-1)}">
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{/product(page=${i})}" th:text="${i+1}"></a>
+                    </li>
+                </div>
+
+
+                <!-- Página siguiente -->
+                <li class="page-item">
+                    <a class="page-link" th:href="@{/product(page=${currentPage + 1})}"
+                       th:if="${currentPage < totalPages - 1}">&raquo;</a>
+                </li>
+
+            </ul>
+        </nav>
+
+    </div>
+
+</div>
+<!-- /.container -->
+
+<footer th:replace="base :: footer"></footer>
+
+<div th:replace="base :: scripts"></div>
+
+</body>
+
+</html>

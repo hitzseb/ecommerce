@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <div th:replace="base :: css"></div>
+    <title>eCommerce</title>
+</head>
+<body>
+
+<header th:replace="base :: header"></header>
+
+<!-- Page Content -->
+<div class="container my-5 py-5">
+
+    <!-- Jumbotron Header -->
+    <header class="jumbotron">
+        <h1 class="display-4">Bienvenido a Spring Ecommerce</h1>
+        <hr class="my-4">
+        <p th:if="${role == null}" class="lead">Tu tienda de productos en Línea</p>
+        <p th:if="${role != null}" class="lead" th:text="'Hola, ' + ${name}"></p>
+    </header>
+
+    <!-- Page Features -->
+    <div class="row text-center my-5">
+
+        <div class="col-lg-3 col-md-6 mb-4" th:each="product: ${products}">
+            <div class="card h-100">
+
+                <img class="card-img-top img-fluid" th:src="${product.image}" alt="">
+
+                <div class="card-body">
+                    <p class="card-text" th:text="${product.name}"></p>
+                </div>
+                <div class="card-footer">
+                    <a th:href="@{/product/{id}  (id=${product.id})  }" class="btn btn-success">Ver
+                        producto</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+    <div class="row justify-content-center">
+        <a href="/product">Ver todos los productos</a>
+    </div>
+
+</div>
+<!-- /.container -->
+
+<footer th:replace="base :: footer"></footer>
+
+<div th:replace="base :: scripts"></div>
+
+</body>
+</html>

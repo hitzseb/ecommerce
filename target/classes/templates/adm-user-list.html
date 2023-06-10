@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <div th:replace="base :: css"></div>
+    <title>Admin</title>
+</head>
+<body>
+
+<header th:replace="base :: header"></header>
+
+<!-- Page Content -->
+<div class="container my-5 py-5">
+
+
+    <!-- Page Heading/Breadcrumbs -->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active">Usuarios</li>
+    </ol>
+
+    <table class="table table-borderless table-hover text-center">
+        <tbody>
+        <tr th:each="user:${userList}">
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.address}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<!-- /.container -->
+
+<footer th:replace="base :: footer"></footer>
+
+<div th:replace="base :: scripts"></div>
+
+</body>
+</html>
