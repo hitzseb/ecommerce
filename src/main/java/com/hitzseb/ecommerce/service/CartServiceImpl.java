@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +51,9 @@ public class CartServiceImpl implements CartService {
         for (Product product : products) {
             total += product.getPrice();
         }
-        return total;
+        BigDecimal truncatedTotal = BigDecimal.valueOf(total).setScale(2, BigDecimal.ROUND_DOWN);
+        double truncatedValue = truncatedTotal.doubleValue();
+        return truncatedValue;
     }
 
     @Override

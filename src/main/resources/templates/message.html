@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <div th:replace="base :: css"></div>
+  <title>eCommerce</title>
+</head>
+<body>
+
+<header th:replace="base :: header"></header>
+
+<div class="container my-5 py-5">
+
+  <p class="h5" th:text="${message}"></p>
+  <a href="/">Volver al inicio</a>
+
+</div>
+
+<footer th:replace="base :: footer"></footer>
+
+<div th:replace="base :: scripts"></div>
+
+</body>
+</html>

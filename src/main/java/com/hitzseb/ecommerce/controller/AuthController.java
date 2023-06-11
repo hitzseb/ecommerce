@@ -1,6 +1,7 @@
 package com.hitzseb.ecommerce.controller;
 
 import com.hitzseb.ecommerce.model.User;
+import com.hitzseb.ecommerce.service.EmailValidator;
 import com.hitzseb.ecommerce.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthController {
     private final UserService service;
+    private final EmailValidator validator;
 
     @GetMapping("/register")
     public String showRegisterPage(Model model) {
@@ -29,28 +31,30 @@ public class AuthController {
 
     @PostMapping("/register")
     public String signUp(@ModelAttribute User user, @RequestParam String confirmPassword, BindingResult bindingResult, Model model) {
+        if (!validator.test(user.getUsername())) {
+            bindingResult.rejectValue("username", "error.email", "Email inválido.");
+        }
         if (!user.getPassword().equals(confirmPassword)) {
             bindingResult.rejectValue("password", "error.password", "Las contraseñas no coincide.");
         }
-
         if (bindingResult.hasErrors()) {
             return "register";
         }
         service.signUpUser(user);
-        model.addAttribute("message", "Gracias por registrarte. Hemos enviado un correo a su dirección de email.");
-        return "greeting";
+        model.addAttribute("message", "Gracias por registrarte. Hemos enviado un correo a tu email para activar tu cuenta.");
+        return "message";
     }
 
     @GetMapping("/confirmation")
     public String confirmRegistration(@RequestParam("token") String verificationToken, Model model) {
         Optional<User> user = service.getUserByToken(verificationToken);
         if (!user.isPresent()) {
-            model.addAttribute("errorMessage", "Invalid verification token");
-            return "error";
+            model.addAttribute("message", "Token inválido.");
+            return "message";
         }
         service.enableUser(user.get());
-        model.addAttribute("message", "Su cuenta ya se encuentra habilitada.");
-        return "greeting";
+        model.addAttribute("message", "Listo. Tu cuenta ya se encuentra activada.");
+        return "message";
     }
 
     @GetMapping("/login")

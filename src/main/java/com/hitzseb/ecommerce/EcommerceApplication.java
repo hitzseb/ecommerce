@@ -64,14 +64,14 @@ public class EcommerceApplication implements ApplicationRunner {
 			String description = faker.lorem().sentence(10);
 			product.setName(name);
 			product.setDescription(description);
-			product.setImage("/images/default.jpg");
+			product.setImage("https://i.imgur.com/5Upm1Ag.jpg");
 			product.setStock((int) (Math.random() * 10) + 1);
 			product.setPrice(roundedPrice);
 			product.setFeatured(true);
 			products.add(product);
 		}
 
-		for (int i = 0; i < 24; i++) {
+		for (int i = 0; i < 32; i++) {
 			Product product = new Product();
 			double price = Math.random() * 1000;
 			double roundedPrice = Math.round(price * 100.0) / 100.0;
@@ -79,7 +79,7 @@ public class EcommerceApplication implements ApplicationRunner {
 			String description = faker.lorem().sentence(10);
 			product.setName(name);
 			product.setDescription(description);
-			product.setImage("/images/default.jpg");
+			product.setImage("https://i.imgur.com/5Upm1Ag.jpg");
 			product.setStock((int) (Math.random() * 10) + 1);
 			product.setPrice(roundedPrice);
 			products.add(product);

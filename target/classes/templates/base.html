@@ -23,7 +23,6 @@
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
             </form>
 
-
             <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarResponsive" aria-controls="navbarResponsive"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -32,20 +31,14 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li th:if="${role == 'USER'}" class="nav-item"><a class="nav-link" th:href="@{/cart}">Carrito</a></li>
-                    <li th:if="${role == 'ADMIN'}" class="nav-item dropdown"><a
-                            class="nav-link dropdown-toggle" href="#"
-                            id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false"> ADMIN </a>
+                    <li th:if="${role == 'USER'}" class="nav-item"><a class="nav-link" th:href="@{/order}">Órdenes</a></li>
 
-                        <div class="dropdown-menu"
-                             aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" th:href="@{/admin/product}">Productos</a>
-                            <a class="dropdown-item" th:href="@{/admin/user}">Usuarios</a>
-                            <a class="dropdown-item" th:href="@{/admin/order}">Ordenes</a>
-                        </div>
-                    </li>
-                    <li th:if="${role == null}" class="nav-item"><a class="nav-link" th:href="@{/login}">Login</a></li>
-                    <li th:if="${role != null}" class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+                    <li th:if="${role == 'ADMIN'}" class="nav-item"><a class="nav-link" th:href="@{/admin/product}">Productos</a></li>
+                    <li th:if="${role == 'ADMIN'}" class="nav-item"><a class="nav-link" th:href="@{/admin/user}">Usuarios</a></li>
+                    <li th:if="${role == 'ADMIN'}" class="nav-item"><a class="nav-link" th:href="@{/admin/order}">Órdenes</a></li>
+
+                    <li th:if="${role == null}" class="nav-item"><a class="nav-link" th:href="@{/login}">Ingresar</a></li>
+                    <li th:if="${role != null}" class="nav-item"><a class="nav-link" th:href="@{/logout}">Salir</a></li>
                 </ul>
             </div>
         </div>

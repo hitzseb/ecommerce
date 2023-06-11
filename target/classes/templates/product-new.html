@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <div th:replace="base :: css"></div>
+    <title>Admin</title>
+</head>
+<body>
+
+<header th:replace="base :: header"></header>
+
+<!-- Page Content -->
+<div class="container my-5 py-5">
+
+
+    <!-- Page Heading/Breadcrumbs -->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/admin/product">Productos</a></li>
+        <li class="breadcrumb-item active">Nuevo producto</li>
+    </ol>
+
+    <div class="row">
+        <div class="col col-lg-6 col-md-8 col-sm-12 mx-auto">
+            <h2>Nuevo producto</h2>
+            <form class="form-horizontal" th:action="@{/admin/product/new/save}" method="post">
+                <div class="form-group">
+                    <label class="control-label" for="name">Nombre:</label>
+                    <input type="text" class="form-control" id="name" name="name"
+                               placeholder="Ingrese el nombre del producto" autocomplete="off" required>
+                    <label class="control-label" for="description">Descripción:</label>
+                    <textarea class="form-control" id="description" name="description"
+                          placeholder="Ingrese la descripcion del producto" required
+                          autocomplete="off"> </textarea>
+                    <label class="control-label" for="image">Imagen:</label>
+                    <input type="text" class="form-control" id="image" name="image"
+                               placeholder="Ingrese la url de la imagen" autocomplete="off" required>
+                    <label class="control-label" for="stock">Cantidad:</label>
+                    <input type="number" class="form-control" id="stock"
+                               name="stock" placeholder="Ingrese la cantidad del producto"
+                               required autocomplete="off">
+                    <label class="control-label" for="price">Precio:</label>
+                    <input type="number" class="form-control" step="any" id="price" name="price"
+                               placeholder="Ingrese el precio del producto" autocomplete="off" required>
+                </div>
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-saved"></span>Agregar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /.container -->
+
+<footer th:replace="base :: footer"></footer>
+
+<div th:replace="base :: scripts"></div>
+
+</body>
+</html>
