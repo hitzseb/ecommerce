@@ -25,9 +25,12 @@ com\hitzseb\ecommerce\service\OrderService.class
 com\hitzseb\ecommerce\service\DetailServiceImpl.class
 com\hitzseb\ecommerce\service\CartService.class
 com\hitzseb\ecommerce\service\EmailServiceImpl.class
+com\hitzseb\ecommerce\model\CreditCard.class
+com\hitzseb\ecommerce\service\CreditCardValidationServiceImpl.class
 com\hitzseb\ecommerce\service\EmailService.class
 com\hitzseb\ecommerce\repo\OrderRepo.class
 com\hitzseb\ecommerce\model\User.class
+com\hitzseb\ecommerce\service\CreditCardValidationService.class
 com\hitzseb\ecommerce\controller\HealthCheckController.class
 com\hitzseb\ecommerce\service\UserService.class
 com\hitzseb\ecommerce\config\PasswordEncoder.class

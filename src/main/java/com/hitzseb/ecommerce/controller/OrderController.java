@@ -38,10 +38,4 @@ public class OrderController {
         model.addAttribute("order", order);
         return "order";
     }
-
-    @GetMapping("/makeOrder")
-    public String makeOrder(HttpSession session) {
-        orderService.makeOrder(session);
-        return "redirect:/order";
-    }
 }

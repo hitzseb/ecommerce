@@ -19,34 +19,35 @@
         <li class="breadcrumb-item active">Carrito</li>
     </ol>
 
-    <form class="my-5">
+    <form class="my-5" th:action="@{/payment/pay}" method="post" th:object="${creditCard}">
         <div class="form-row">
             <div class="col-md-6 mb-3">
                 <label for="cardholder_name">Nombre del titular</label>
-                <input type="text" class="form-control" name="cardholder_name" id="cardholder_name"
-                       placeholder="Nombre del titular de la tarjeta" th:value="${owner}" required>
+                <input type="text" class="form-control" id="cardholder_name"
+                       placeholder="Nombre del titular de la tarjeta" th:field="*{cardholderName}" required>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="card_number">Número de tarjeta</label>
-                <input type="text" class="form-control" name="card_number" id="card_number"
-                       placeholder="Número de tarjeta" th:value="${number}" required>
+                <input type="text" class="form-control" id="card_number"
+                       placeholder="Número de tarjeta" th:field="*{cardNumber}" required>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-6 mb-3">
                 <label for="expiration_date">Fecha de vencimiento</label>
-                <input type="text" class="form-control" name="expiration_date" id="expiration_date"
-                       placeholder="Fecha de vencimiento" th:value="${date}"
-                       required>
+                <input type="text" class="form-control" id="expiration_date"
+                       placeholder="Fecha de vencimiento" th:field="*{expirationDate}" required>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="cvv">Código de seguridad</label>
-                <input type="text" class="form-control" name="cvv" id="cvv" placeholder="CVV" maxlength="3"
-                       th:value="${cvv}" required>
+                <input type="text" class="form-control" id="cvv" placeholder="CVV" maxlength="3"
+                       th:field="*{cvv}" required>
             </div>
         </div>
-        <a class="btn btn-primary" th:href="@{/order/makeOrder}">Realizar compra</a>
+        <button type="submit" class="btn btn-primary">Realizar compra</button>
     </form>
+
+    <p class="text-danger my-5 text-center" th:if="${creditCardError}" th:text="${creditCardError}"></p>
 
 </div>
 <!-- /.container -->

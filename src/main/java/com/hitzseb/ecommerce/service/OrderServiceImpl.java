@@ -48,19 +48,21 @@ public class OrderServiceImpl implements OrderService {
         }
         detailService.saveAllDetails(detailList);
 
-        order.setUser(user);
-        order.setBuyer(user.getName());
-        order.setAddress(user.getAddress());
-        order.setOrderNumber(orderNumber);
-        order.setDetails(detailList);
-        order.setTotal(total);
+        if (total > 0) {
+            order.setUser(user);
+            order.setBuyer(user.getName());
+            order.setAddress(user.getAddress());
+            order.setOrderNumber(orderNumber);
+            order.setDetails(detailList);
+            order.setTotal(total);
 
-        orderRepo.save(order);
+            orderRepo.save(order);
 
-        List<Order> orderList = user.getOrders();
-        orderList.add(order);
-        user.setOrders(orderList);
-        userService.updateUser(user);
+            List<Order> orderList = user.getOrders();
+            orderList.add(order);
+            user.setOrders(orderList);
+            userService.updateUser(user);
+        }
 
         cartService.clearCart(session);
     }
