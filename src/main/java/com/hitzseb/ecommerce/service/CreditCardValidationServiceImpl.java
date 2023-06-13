@@ -1,11 +1,9 @@
 package com.hitzseb.ecommerce.service;
 
 import com.hitzseb.ecommerce.model.CreditCard;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class CreditCardValidationServiceImpl implements CreditCardValidationService {
 
     @Override

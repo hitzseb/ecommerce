@@ -1,27 +1,25 @@
 package com.hitzseb.ecommerce;
 
-import com.github.javafaker.Faker;
 import com.hitzseb.ecommerce.model.*;
-import com.hitzseb.ecommerce.repo.ProductRepo;
-import com.hitzseb.ecommerce.repo.UserRepo;
+import com.hitzseb.ecommerce.service.FakeProductService;
+import com.hitzseb.ecommerce.service.FakeUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RequiredArgsConstructor
 @SpringBootApplication
 public class EcommerceApplication implements ApplicationRunner {
-	private final ProductRepo productRepo;
-	private final UserRepo userRepo;
-	private final BCryptPasswordEncoder passwordEncoder;
+	private final FakeUserService fakeUserService;
+	private final FakeProductService fakeProductService;
 
+	@Value("${user.test.username}")
+	private String userUsername;
+	@Value("${user.test.password}")
+	private String userPassword;
 	@Value("${admin.test.username}")
 	private String adminUsername;
 	@Value("${admin.test.password}")
@@ -33,58 +31,14 @@ public class EcommerceApplication implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) {
-		Faker faker = new Faker();
 
-		User admin = new User();
-		admin.setUsername(adminUsername);
-		admin.setPassword(passwordEncoder.encode(adminPassword));
-		admin.setRole(Role.ADMIN);
-		admin.setName("Admin");
-		admin.setEnabled(true);
-		userRepo.save(admin);
+		fakeProductService.createFakeProducts(8, true);
+		fakeProductService.createFakeProducts(32, false);
 
-		List<User> userList = new ArrayList<>();
-		for (int i = 0; i < 20; i++) {
-			User randomUser = new User();
-			randomUser.setName(faker.funnyName().name());
-			randomUser.setUsername(faker.internet().emailAddress());
-			randomUser.setAddress(faker.address().fullAddress());
-			randomUser.setEnabled(true);
-			userList.add(randomUser);
-		}
-		userRepo.saveAll(userList);
+		fakeUserService.createFakeUser("User", userUsername, userPassword, Role.USER);
+		fakeUserService.createFakeUser("Admin", adminUsername, adminPassword, Role.ADMIN);
 
-		List<Product> products = new ArrayList<>();
+		fakeUserService.createFakeUsers(20);
 
-		for (int i = 0; i < 8; i++) {
-			Product product = new Product();
-			double price = Math.random() * 1000;
-			double roundedPrice = Math.round(price * 100.0) / 100.0;
-			String name = faker.commerce().productName();
-			String description = faker.lorem().sentence(10);
-			product.setName(name);
-			product.setDescription(description);
-			product.setImage("https://i.imgur.com/5Upm1Ag.jpg");
-			product.setStock((int) (Math.random() * 10) + 1);
-			product.setPrice(roundedPrice);
-			product.setFeatured(true);
-			products.add(product);
-		}
-
-		for (int i = 0; i < 32; i++) {
-			Product product = new Product();
-			double price = Math.random() * 1000;
-			double roundedPrice = Math.round(price * 100.0) / 100.0;
-			String name = faker.commerce().productName();
-			String description = faker.lorem().sentence(10);
-			product.setName(name);
-			product.setDescription(description);
-			product.setImage("https://i.imgur.com/5Upm1Ag.jpg");
-			product.setStock((int) (Math.random() * 10) + 1);
-			product.setPrice(roundedPrice);
-			products.add(product);
-		}
-
-		productRepo.saveAll(products);
 	}
 }

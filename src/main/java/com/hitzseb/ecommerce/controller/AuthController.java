@@ -1,7 +1,7 @@
 package com.hitzseb.ecommerce.controller;
 
 import com.hitzseb.ecommerce.model.User;
-import com.hitzseb.ecommerce.service.EmailValidator;
+import com.hitzseb.ecommerce.service.EmailValidationService;
 import com.hitzseb.ecommerce.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthController {
     private final UserService service;
-    private final EmailValidator validator;
+    private final EmailValidationService validator;
 
     @GetMapping("/register")
     public String showRegisterPage(Model model) {
@@ -31,7 +31,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public String signUp(@ModelAttribute User user, @RequestParam String confirmPassword, BindingResult bindingResult, Model model) {
-        if (!validator.test(user.getUsername())) {
+        if (!validator.validateEmail(user.getUsername())) {
             bindingResult.rejectValue("username", "error.email", "Email inválido.");
         }
         if (!user.getPassword().equals(confirmPassword)) {
