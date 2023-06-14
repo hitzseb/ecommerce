@@ -5,6 +5,7 @@ import com.hitzseb.ecommerce.model.User;
 import com.hitzseb.ecommerce.repo.UserRepo;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,6 +24,9 @@ public class UserServiceImpl implements UserService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final String USER_NOT_FOUND_MSG = "user with email %s not found";
     private final EmailServiceImpl emailService;
+
+    @Value("${server.url}")
+    private String serverUrl;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -51,7 +55,7 @@ public class UserServiceImpl implements UserService {
         user.setVerificationToken(verificationToken);
         repo.save(user);
 
-        String verificationLink = "http://localhost:8080/confirmation?token=" + verificationToken;
+        String verificationLink = serverUrl + "confirmation?token=" + verificationToken;
 
         emailService.sendVerificationEmail(user.getUsername(), verificationLink);
     }
