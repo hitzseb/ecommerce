@@ -22,7 +22,7 @@ public class AdmUserController {
         List<User> userList = userService.findAllUsers(session);
         model.addAttribute("role", session.getAttribute("role"));
         model.addAttribute("userList", userList);
-        return "user-list";
+        return "user-table";
     }
 
 }

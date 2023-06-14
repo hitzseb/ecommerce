@@ -30,6 +30,6 @@ public class AdmOrderController {
         model.addAttribute("orders", orderList);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("currentPage", page);
-        return "order-list";
+        return "order-table";
     }
 }

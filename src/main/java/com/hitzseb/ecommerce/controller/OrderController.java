@@ -28,7 +28,7 @@ public class OrderController {
         List<Order> orders = user.getOrders();
         model.addAttribute("role", session.getAttribute("role"));
         model.addAttribute("orders", orders);
-        return "order-list";
+        return "order-table";
     }
 
     @GetMapping("/{id}")

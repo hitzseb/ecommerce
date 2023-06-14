@@ -28,7 +28,7 @@ public class ProductController {
         model.addAttribute("products", products);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("currentPage", page);
-        return "product-list";
+        return "product-cards";
     }
 
     @GetMapping("/search")
@@ -36,7 +36,7 @@ public class ProductController {
         List<Product> products = productService.searchProducts(name);
         model.addAttribute("role", session.getAttribute("role"));
         model.addAttribute("products", products);
-        return "product-list";
+        return "product-cards";
     }
 
     @GetMapping("/{id}")
