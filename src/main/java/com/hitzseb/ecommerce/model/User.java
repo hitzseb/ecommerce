@@ -1,6 +1,5 @@
 package com.hitzseb.ecommerce.model;
 
-import com.hitzseb.ecommerce.enums.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

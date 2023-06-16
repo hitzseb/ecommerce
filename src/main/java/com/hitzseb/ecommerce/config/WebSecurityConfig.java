@@ -15,12 +15,12 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf((csrf) -> csrf.disable())
-                .cors(withDefaults())
+//                .csrf((csrf) -> csrf.disable())
+//                .cors(withDefaults())
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/", "/register", "/confirmation", "/product", "/product/*", "/health").permitAll()
                         .requestMatchers("/cart", "/payment", "/order").hasAuthority("USER")
-                        .requestMatchers("/admin/**", "/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").hasAuthority("ADMIN")
+                        .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
