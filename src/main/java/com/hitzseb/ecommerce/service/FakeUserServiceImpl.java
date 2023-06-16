@@ -1,7 +1,7 @@
 package com.hitzseb.ecommerce.service;
 
 import com.github.javafaker.Faker;
-import com.hitzseb.ecommerce.model.Role;
+import com.hitzseb.ecommerce.enums.Role;
 import com.hitzseb.ecommerce.model.User;
 import com.hitzseb.ecommerce.repo.UserRepo;
 import lombok.RequiredArgsConstructor;

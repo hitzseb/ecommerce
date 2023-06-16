@@ -16,5 +16,5 @@ public interface UserService extends UserDetailsService {
     Optional<User> findUserById(Long id);
     void updateUser(User user);
 
-    List<User> findAllUsers(HttpSession session);
+    List<User> findAllUsers();
 }

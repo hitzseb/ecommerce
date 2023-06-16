@@ -1,6 +1,6 @@
 package com.hitzseb.ecommerce.service;
 
-import com.hitzseb.ecommerce.model.Role;
+import com.hitzseb.ecommerce.enums.Role;
 import com.hitzseb.ecommerce.model.User;
 import com.hitzseb.ecommerce.repo.UserRepo;
 import jakarta.servlet.http.HttpSession;
@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAllUsers(HttpSession session) {
+    public List<User> findAllUsers() {
         return repo.findByRoleOrderByName(Role.USER);
     }
 }

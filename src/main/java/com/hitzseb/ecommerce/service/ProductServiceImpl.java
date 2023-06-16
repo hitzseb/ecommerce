@@ -1,9 +1,11 @@
 package com.hitzseb.ecommerce.service;
 
+import com.hitzseb.ecommerce.dto.ProductDto;
 import com.hitzseb.ecommerce.model.Product;
 import com.hitzseb.ecommerce.repo.ProductRepo;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -39,37 +41,52 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product findProductById(Long id) throws EntityNotFoundException {
-        return repo.findById(id).orElseThrow(() -> new EntityNotFoundException("product not found with id " + id));
+        return repo.findById(id).orElseThrow(() -> new EntityNotFoundException("No se ha encontrado un producto con id " + id));
     }
 
     @Override
-    public void saveProduct(Product product) {
-        repo.save(product);
+    public Product saveProduct(ProductDto productDto) throws ServiceException {
+        Product product = new Product();
+        product.setName(productDto.name());
+        product.setDescription(productDto.description());
+        product.setImage(productDto.image());
+        product.setStock(productDto.stock());
+        product.setPrice(productDto.price());
+        try {
+            return repo.save(product);
+        } catch (ServiceException e) {
+            throw new ServiceException("No se pudo guardar el producto", e);
+        }
     }
 
     @Override
-    public void updateProduct(Long id, Product updatedProduct) throws EntityNotFoundException {
-        Product product = repo.findById(id).orElseThrow(() -> new EntityNotFoundException("product not found with id " + id));
-        if (product.getName() != updatedProduct.getName()) {
-            product.setName(updatedProduct.getName());
+    public Product updateProduct(Long id, ProductDto productDto) throws EntityNotFoundException {
+        Product product = repo.findById(id).orElseThrow(() -> new EntityNotFoundException("No se ha encontrado un producto con id " + id));
+        if (product.getName() != productDto.name()) {
+            product.setName(productDto.name());
         }
-        if (product.getDescription() != updatedProduct.getDescription()) {
-            product.setDescription(updatedProduct.getDescription());
+        if (product.getDescription() != productDto.description()) {
+            product.setDescription(productDto.description());
         }
-        if (product.getImage() != updatedProduct.getImage()) {
-            product.setImage(updatedProduct.getImage());
+        if (product.getImage() != productDto.image()) {
+            product.setImage(productDto.image());
         }
-        if (product.getPrice() != updatedProduct.getPrice()) {
-            product.setPrice(updatedProduct.getPrice());
+        if (product.getPrice() != productDto.price()) {
+            product.setPrice(productDto.price());
         }
-        if (product.getStock() != updatedProduct.getStock()) {
-            product.setStock(updatedProduct.getStock());
+        if (product.getStock() != productDto.stock()) {
+            product.setStock(productDto.stock());
         }
-        repo.save(product);
+        return repo.save(product);
     }
 
     @Override
-    public void deleteProduct(Long id) {
-        repo.deleteById(id);
+    public void deleteProduct(Long id) throws EntityNotFoundException, ServiceException {
+        repo.findById(id).orElseThrow(() -> new EntityNotFoundException("No se ha encontrado un producto con id " + id));
+        try {
+            repo.deleteById(id);
+        } catch (ServiceException e) {
+            throw new ServiceException("No se ha podido eliminar el producto con id " + id, e);
+        }
     }
 }

@@ -1,8 +1,10 @@
 package com.hitzseb.ecommerce;
 
-import com.hitzseb.ecommerce.model.*;
+import com.hitzseb.ecommerce.enums.Role;
 import com.hitzseb.ecommerce.service.FakeProductService;
 import com.hitzseb.ecommerce.service.FakeUserService;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -12,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @RequiredArgsConstructor
 @SpringBootApplication
+@OpenAPIDefinition(info = @Info(title = "Spring Ecommerce Api", version = "1.0"))
 public class EcommerceApplication implements ApplicationRunner {
 	private final FakeUserService fakeUserService;
 	private final FakeProductService fakeProductService;

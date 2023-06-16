@@ -39,6 +39,8 @@
                         </li>
                         <li th:if="${role == 'ADMIN'}" class="nav-item"><a class="nav-link" th:href="@{/admin/order}">Órdenes</a>
                         </li>
+                        <li th:if="${role == 'ADMIN'}" class="nav-item"><a class="nav-link" th:href="@{/swagger-ui/index.html}" target="_blank">API</a>
+                        </li>
 
                         <li th:if="${role == null}" class="nav-item"><a class="nav-link" th:href="@{/login}">Ingresar</a>
                         </li>

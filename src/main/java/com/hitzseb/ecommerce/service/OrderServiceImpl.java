@@ -73,8 +73,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Page<Order> getOrders(int page, int size) {
+    public Page<Order> getPaginatedOrders(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return orderRepo.findPaginatedOrders(pageable);
+    }
+
+    @Override
+    public List<Order> getAllOrders() {
+        return orderRepo.findAll();
     }
 }

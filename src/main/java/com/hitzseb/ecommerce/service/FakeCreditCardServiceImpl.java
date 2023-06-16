@@ -1,7 +1,7 @@
 package com.hitzseb.ecommerce.service;
 
 import com.github.javafaker.Faker;
-import com.hitzseb.ecommerce.model.CreditCard;
+import com.hitzseb.ecommerce.dto.CreditCard;
 import com.hitzseb.ecommerce.model.User;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
