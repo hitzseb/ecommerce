@@ -6,7 +6,6 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,13 +42,8 @@ public class CartService {
     }
 
     public double getTotalPrice(List<Product> products) {
-        double total = 0;
-        for (Product product : products) {
-            total += product.getPrice();
-        }
-        BigDecimal truncatedTotal = BigDecimal.valueOf(total).setScale(2, BigDecimal.ROUND_DOWN);
-        double truncatedValue = truncatedTotal.doubleValue();
-        return truncatedValue;
+        double total = products.stream().mapToDouble(Product::getPrice).sum();
+        return Math.floor(total * 100) / 100;
     }
 
     public void clearCart(HttpSession session) {

@@ -13,19 +13,8 @@ import java.util.Optional;
 public class DetailService {
     private final DetailRepo detailRepo;
 
-    public void saveDetail(Detail detail) {
-        detailRepo.save(detail);
-    }
-
     public void saveAllDetails(List<Detail> detailList) {
         detailRepo.saveAll(detailList);
     }
 
-    public Optional<Detail> findDetailById(Long id) {
-        return detailRepo.findById(id);
-    }
-
-    public void deleteDetailById(Long id) {
-        detailRepo.deleteById(id);
-    }
 }

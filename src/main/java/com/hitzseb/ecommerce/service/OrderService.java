@@ -75,7 +75,4 @@ public class OrderService {
         return orderRepo.findPaginatedOrders(pageable);
     }
 
-    public List<Order> getAllOrders() {
-        return orderRepo.findAll();
-    }
 }
