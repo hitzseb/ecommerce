@@ -32,13 +32,13 @@ public class EcommerceApplication implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments args) {
 
-		fakeProductService.createFakeProducts(8, true);
-		fakeProductService.createFakeProducts(16, false);
+		fakeProductService.createFakeProducts(4, true);
+//		fakeProductService.createFakeProducts(16, false);
 
 		fakeUserService.createFakeUser("User", userUsername, userPassword, Role.USER);
 		fakeUserService.createFakeUser("Admin", adminUsername, adminPassword, Role.ADMIN);
 
-		fakeUserService.createFakeUsers(20);
+		fakeUserService.createFakeUsers(10);
 
 	}
 }
