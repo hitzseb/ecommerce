@@ -2,6 +2,7 @@ package com.hitzseb.ecommerce.controller;
 
 import com.hitzseb.ecommerce.model.Product;
 import com.hitzseb.ecommerce.service.ProductService;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -45,6 +47,15 @@ public class ProductController {
         model.addAttribute("role", session.getAttribute("role"));
         model.addAttribute("product", product);
         return "product";
+    }
+
+    @GetMapping("/image/{id}")
+    public void showProductImage(@PathVariable Long id, HttpServletResponse response) throws IOException {
+        Product product = productService.findProductById(id);
+        if (product.getImage() != null) {
+            response.setContentType("image/jpeg");
+            response.getOutputStream().write(product.getImage());
+        }
     }
 
 }

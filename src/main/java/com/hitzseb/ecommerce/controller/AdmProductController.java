@@ -1,5 +1,6 @@
 package com.hitzseb.ecommerce.controller;
 
+import com.hitzseb.ecommerce.dto.ProductDto;
 import com.hitzseb.ecommerce.model.Product;
 import com.hitzseb.ecommerce.service.ProductService;
 import jakarta.servlet.http.HttpSession;
@@ -33,8 +34,8 @@ public class AdmProductController {
     }
 
     @PostMapping("/new/save")
-    public String saveProduct(@ModelAttribute Product product) {
-        service.saveProduct(product);
+    public String saveProduct(@ModelAttribute ProductDto productDto) {
+        service.saveProduct(productDto);
         return "redirect:/admin/product";
     }
 
@@ -47,8 +48,8 @@ public class AdmProductController {
     }
 
     @PostMapping("/{id}/edit/save")
-    public String editProduct(@PathVariable Long id, Product product) {
-        service.updateProduct(id, product);
+    public String editProduct(@PathVariable Long id, ProductDto productDto) {
+        service.updateProduct(id, productDto);
         return "redirect:/admin/product";
     }
 

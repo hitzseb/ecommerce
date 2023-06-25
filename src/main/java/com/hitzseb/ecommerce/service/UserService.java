@@ -1,6 +1,6 @@
 package com.hitzseb.ecommerce.service;
 
-import com.hitzseb.ecommerce.model.Role;
+import com.hitzseb.ecommerce.enums.Role;
 import com.hitzseb.ecommerce.model.User;
 import com.hitzseb.ecommerce.repo.UserRepo;
 import jakarta.servlet.http.HttpSession;

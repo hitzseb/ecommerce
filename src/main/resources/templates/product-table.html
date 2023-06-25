@@ -35,7 +35,7 @@
         <tr th:each="product:${products}">
             <td class="align-middle" th:text="${product.name}"></td>
             <td class="align-middle">
-                <img th:src="${product.image}" width="100">
+                <img th:src="@{/product/image/{id}(id=${product.id})}" alt="Imagen del producto" width="100">
             </td>
             <td class="align-middle" th:text="${product.description}"></td>
             <td class="align-middle" th:text="${product.stock}"></td>

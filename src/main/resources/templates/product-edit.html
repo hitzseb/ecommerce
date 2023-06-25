@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col col-lg-6 col-md-8 col-sm-12 mx-auto">
             <h2>Editar producto</h2>
-            <form class="form-horizontal" th:action="@{/admin/product/{id}/edit/save(id=${product.id})}" method="post">
+            <form class="form-horizontal" th:action="@{/admin/product/{id}/edit/save(id=${product.id})}" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label class="control-label" for="name">Nombre:</label>
                     <input type="text" class="form-control" id="name" name="name"
@@ -34,10 +34,11 @@
                     <textarea class="form-control" id="description" name="description"
                               placeholder="Ingrese la descripcion del producto" required autocomplete="off"
                               th:text="${product.description}"> </textarea>
-                    <label class="control-label" for="image">Imagen:</label>
-                    <input type="text" class="form-control" id="image" name="image"
-                           placeholder="Ingrese la url de la imagen" th:value="${product.image}" autocomplete="off"
-                           required>
+                    <label class="control-label" for="imageFile">Imagen:</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="imageFile" name="imageFile" required>
+                        <label class="custom-file-label" for="imageFile">Seleccionar archivo</label>
+                    </div>
                     <label class="control-label" for="stock">Cantidad:</label>
                     <input type="number" class="form-control" id="stock" name="stock"
                            placeholder="Ingrese la cantidad del producto" th:value="${product.stock}" required

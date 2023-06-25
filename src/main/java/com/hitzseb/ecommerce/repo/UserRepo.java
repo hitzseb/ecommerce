@@ -1,6 +1,6 @@
 package com.hitzseb.ecommerce.repo;
 
-import com.hitzseb.ecommerce.model.Role;
+import com.hitzseb.ecommerce.enums.Role;
 import com.hitzseb.ecommerce.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

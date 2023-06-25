@@ -1,5 +1,6 @@
 package com.hitzseb.ecommerce.service;
 
+import com.hitzseb.ecommerce.dto.ProductDto;
 import com.hitzseb.ecommerce.model.Product;
 import com.hitzseb.ecommerce.repo.ProductRepo;
 import jakarta.persistence.EntityNotFoundException;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepo repo;
+    private final ImageService imageService;
 
     public List<Product> findAllProducts() {
         return repo.findAll();
@@ -38,7 +40,13 @@ public class ProductService {
         return repo.findById(id).orElseThrow(() -> new EntityNotFoundException("No se ha encontrado un producto con id " + id));
     }
 
-    public Product saveProduct(Product product) throws ServiceException {
+    public Product saveProduct(ProductDto productDto) throws ServiceException {
+        Product product = new Product();
+        product.setName(productDto.name());
+        product.setDescription(productDto.description());
+        product.setImage(imageService.convertImageToByteArray(productDto.imageFile()));
+        product.setStock(productDto.stock());
+        product.setPrice(productDto.price());
         try {
             return repo.save(product);
         } catch (ServiceException e) {
@@ -46,23 +54,19 @@ public class ProductService {
         }
     }
 
-    public Product updateProduct(Long id, Product updatedProduct) throws EntityNotFoundException {
+    public Product updateProduct(Long id, ProductDto productDto) throws EntityNotFoundException {
         Product product = repo.findById(id).orElseThrow(() -> new EntityNotFoundException("No se ha encontrado un producto con id " + id));
-        if (product.getName() != updatedProduct.getName()) {
-            product.setName(updatedProduct.getName());
+
+        if (productDto.imageFile() != null && !productDto.imageFile().isEmpty()) {
+            byte[] image = imageService.convertImageToByteArray(productDto.imageFile());
+            product.setImage(image);
         }
-        if (product.getDescription() != updatedProduct.getDescription()) {
-            product.setDescription(updatedProduct.getDescription());
-        }
-        if (product.getImage() != updatedProduct.getImage()) {
-            product.setImage(updatedProduct.getImage());
-        }
-        if (product.getPrice() != updatedProduct.getPrice()) {
-            product.setPrice(updatedProduct.getPrice());
-        }
-        if (product.getStock() != updatedProduct.getStock()) {
-            product.setStock(updatedProduct.getStock());
-        }
+
+        product.setName(productDto.name());
+        product.setDescription(productDto.description());
+        product.setStock(productDto.stock());
+        product.setPrice(productDto.price());
+
         return repo.save(product);
     }
 

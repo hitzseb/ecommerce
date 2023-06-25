@@ -12,7 +12,9 @@ public class Product {
     private Long id;
     private String name;
     private String description;
-    private String image;
+    @Lob
+    @Column(columnDefinition = "BLOB")
+    private byte[] image;
     private double price;
     private int stock;
     private boolean isFeatured = false;

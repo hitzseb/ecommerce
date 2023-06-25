@@ -5,8 +5,9 @@ import com.hitzseb.ecommerce.model.Product;
 import com.hitzseb.ecommerce.repo.ProductRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -15,6 +16,7 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class FakeProductService {
     private final ProductRepo productRepo;
+    private final ImageService imageService;
 
     Faker faker = new Faker();
 
@@ -23,11 +25,17 @@ public class FakeProductService {
                     Product product = new Product();
                     double price = Math.random() * 1000;
                     double roundedPrice = Math.round(price * 100.0) / 100.0;
+                    MultipartFile image;
+                    try {
+                        image = imageService.getDefaultImage();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                     String name = faker.commerce().productName();
                     String description = faker.lorem().sentence(10);
                     product.setName(name);
                     product.setDescription(description);
-                    product.setImage("https://i.imgur.com/5Upm1Ag.jpg");
+                    product.setImage(imageService.convertImageToByteArray(image));
                     product.setStock((int) (Math.random() * 10) + 1);
                     product.setPrice(roundedPrice);
                     product.setFeatured(featured);

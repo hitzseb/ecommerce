@@ -7,8 +7,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
@@ -18,7 +16,8 @@ public class WebSecurityConfig {
 //                .csrf((csrf) -> csrf.disable())
 //                .cors(withDefaults())
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/register", "/confirmation", "/product", "/product/*", "/health").permitAll()
+                        .requestMatchers("/", "/register", "/confirmation",
+                                "/product", "/product/*", "/product/image/**", "/health").permitAll()
                         .requestMatchers("/cart", "/payment", "/order").hasAuthority("USER")
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated()
@@ -34,7 +33,8 @@ public class WebSecurityConfig {
                         .logoutSuccessUrl("/logout-success")
                         .permitAll()
                 )
-                .rememberMe(Customizer.withDefaults());;
+                .rememberMe(Customizer.withDefaults());
+        ;
 
         return http.build();
 

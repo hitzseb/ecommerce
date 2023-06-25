@@ -1,6 +1,6 @@
 package com.hitzseb.ecommerce;
 
-import com.hitzseb.ecommerce.model.Role;
+import com.hitzseb.ecommerce.enums.Role;
 import com.hitzseb.ecommerce.service.FakeProductService;
 import com.hitzseb.ecommerce.service.FakeUserService;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +33,7 @@ public class EcommerceApplication implements ApplicationRunner {
 	public void run(ApplicationArguments args) {
 
 		fakeProductService.createFakeProducts(8, true);
-		fakeProductService.createFakeProducts(32, false);
+		fakeProductService.createFakeProducts(16, false);
 
 		fakeUserService.createFakeUser("User", userUsername, userPassword, Role.USER);
 		fakeUserService.createFakeUser("Admin", adminUsername, adminPassword, Role.ADMIN);
