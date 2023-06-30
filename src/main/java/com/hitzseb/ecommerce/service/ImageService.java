@@ -28,7 +28,7 @@ public class ImageService {
     }
 
     public MultipartFile getDefaultImage() throws IOException {
-        String imagePath = "src/main/resources/static/default.png";
+        String imagePath = "src/main/resources/static/default.jpg";
         Path path = Paths.get(imagePath);
 
         byte[] fileBytes = Files.readAllBytes(path);
