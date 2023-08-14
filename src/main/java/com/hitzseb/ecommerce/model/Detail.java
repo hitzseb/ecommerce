@@ -12,4 +12,7 @@ public class Detail {
     private Long id;
     private String name;
     private double price;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 }

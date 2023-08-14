@@ -18,12 +18,7 @@ public class Order {
     private String orderNumber;
     private LocalDateTime date = LocalDateTime.now();
     private double total;
-    @ManyToMany(cascade = CascadeType.REMOVE)
-    @JoinTable(
-            name = "order_details",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "detail_id")
-    )
+    @OneToMany(mappedBy = "order")
     private List<Detail> details;
     @ManyToOne
     private User user;
