@@ -78,4 +78,10 @@ public class ProductService {
             throw new ServiceException("No se ha podido eliminar el producto con id " + id, e);
         }
     }
+
+    public void toggleFeatured(Long id) throws EntityNotFoundException {
+        Product product = repo.findById(id).orElseThrow(() -> new EntityNotFoundException("No se ha encontrado un producto con id " + id));
+        product.setFeatured(!product.isFeatured());
+        repo.save(product);
+    }
 }

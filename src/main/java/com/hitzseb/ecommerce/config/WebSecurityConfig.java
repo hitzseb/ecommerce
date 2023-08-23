@@ -13,11 +13,9 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-//                .csrf((csrf) -> csrf.disable())
-//                .cors(withDefaults())
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/", "/register", "/confirmation",
-                                "/product", "/product/*", "/product/image/**", "/health").permitAll()
+                                "/product", "/product/*", "/product/image/**").permitAll()
                         .requestMatchers("/cart", "/payment", "/order").hasAuthority("USER")
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated()

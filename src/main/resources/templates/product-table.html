@@ -12,7 +12,6 @@
 <!-- Page Content -->
 <div class="container my-5 py-5">
 
-
     <!-- Page Heading/Breadcrumbs -->
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -20,17 +19,6 @@
     </ol>
 
     <table class="table table-borderless table-hover text-center">
-        <thead>
-        <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Imagen</th>
-            <th scope="col">Descripción</th>
-            <th scope="col">Stock</th>
-            <th scope="col">Precio</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
         <tbody>
         <tr th:each="product:${products}">
             <td class="align-middle" th:text="${product.name}"></td>
@@ -40,6 +28,15 @@
             <td class="align-middle" th:text="${product.description}"></td>
             <td class="align-middle" th:text="${product.stock}"></td>
             <td class="align-middle">$<span th:text="${product.price}"></span></td>
+            <td class="align-middle">
+                <form th:action="@{/admin/product/{id}/toggleFeatured(id=${product.id})}" th:object="${product}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <input type="hidden" th:name="id" th:value="${product.id}" />
+                    <button type="submit" class="btn btn-link" th:classappend="${product.isFeatured} ? 'alert-success text-success' : 'alert-danger text-danger'">
+                        Destacado
+                    </button>
+                </form>
+            </td>
             <td class="align-middle">
                 <a th:href="@{/admin/product/{id}/edit (id=${product.id}) }">Editar</a>
             </td>

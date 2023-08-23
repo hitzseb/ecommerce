@@ -59,4 +59,16 @@ public class AdmProductController {
         return "redirect:/admin/product";
     }
 
+//    @PostMapping("/{id}/featured")
+//    public void printFeatured(@PathVariable Long id) {
+//        Product product = service.findProductById(id);
+//        System.out.println(product.isFeatured());
+//    }
+
+    @PostMapping("/{id}/toggleFeatured")
+    public String toggleFeatured(@RequestParam Long id) {
+        service.toggleFeatured(id);
+        return "redirect:/admin/product";
+    }
+
 }
